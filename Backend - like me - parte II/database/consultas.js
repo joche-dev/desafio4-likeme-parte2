@@ -15,6 +15,7 @@ const { Pool } = pkg;
 //   });
 
 const pool = new Pool({
+  // Datos de la conexion con la base de datos se cargan a través del .env
   allowExitOnIdle: true,
 });
 
@@ -39,6 +40,11 @@ const agregarPost = async (post) => {
 };
 
 const modificarPost = async (likes, id) => {
+
+  // Si lo hiciera solo con el id seria asi:
+  // cont consulta = 'UPDATE post SET likes = likes + 1 WHERE id = $1';
+  // const values =[id];
+
   const consulta = 'UPDATE posts SET likes = $1 WHERE id = $2';
   const values = [likes, id];
   const result = await pool.query(consulta, values);
